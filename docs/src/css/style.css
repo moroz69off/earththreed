@@ -1,4 +1,9 @@
-body{
+body, #c{
   margin: 0;
   padding: 0;
+}
+
+#c{
+  width: 100%;
+  height: 100%;
 }
