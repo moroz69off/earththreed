@@ -1,6 +1,71 @@
 import * as THREE from 'https://moroz69off.github.io/earththreed/three/three.module.js';
+var /*const*/ scene = null;
+var /*const*/ camera = null;
+var /*const*/ renderer = null;
+var /*const*/ earth_radius = 25;
+var /*const*/ latitude_segments = 32;  //широта
+var /*const*/ longitude_segments = 32; //долгота
+var /*const*/ loading_manager = new THREE.LoadingManager();
+var /*const*/ texsture_loader = new THREE.TextureLoader(loading_manager);
 
-const scene = new THREE.Scene();
-scene.background = new THREE.Color("rgb(22, 222, 222)");
+loading_manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+	console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+};
 
-console.log(scene.background);
+loading_manager.onLoad = function ( ) {
+	console.log( 'Loading complete!');
+};
+
+loading_manager.onError = function ( url ) {
+	console.log( 'There was an error loading ' + url );
+};
+
+loading_manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+	console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+};
+
+var /*const*/ earth_map = texsture_loader.load('./src/texture/earth_map_texture.gif');
+//"W:\openserver\domains\earththreed.main\docs\src\texture\earth_map_texture.gif"
+console.log(earth_map);
+
+ThreeInit();
+
+function ThreeInit () {
+	window.onload = function () {
+		scene = new THREE.Scene();
+		camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+		renderer = new THREE.WebGLRenderer({
+			antialias: true,
+			alpha: true,
+			canvas: document.getElementById('c')
+		});
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		renderer.setClearColor(0xCFCFCF);
+		
+		const earth_geometry = new THREE.SphereGeometry(
+			earth_radius,
+			latitude_segments,
+			longitude_segments
+		);
+		const earth_material = new THREE.MeshBasicMaterial({
+			color: 0xFFFFFF,
+			map: earth_map
+		});
+		const earth = new THREE.Mesh( earth_geometry, earth_material );
+		scene.add( earth );
+
+		camera.position.z = 50;
+
+		function animate() {
+			requestAnimationFrame( animate );
+			// animation=================================
+
+			// end animation=============================
+			renderer.render( scene, camera );
+		}
+		animate();
+
+		console.log(renderer); // ----------------temp log
+	}
+}
+

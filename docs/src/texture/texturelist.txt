@@ -1,1 +1,2 @@
 White noise 512 X 512: wnoise.png
+Earth color map texture 2048 X 1024: earth_map_texture.gif
