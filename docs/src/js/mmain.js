@@ -7,6 +7,7 @@ var /*const*/ latitude_segments = 32;  //широта
 var /*const*/ longitude_segments = 32; //долгота
 var /*const*/ loading_manager = new THREE.LoadingManager();
 var /*const*/ texsture_loader = new THREE.TextureLoader(loading_manager);
+var /*const*/ camera_orbit_control = null;
 
 loading_manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
 	console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
@@ -66,7 +67,6 @@ function ThreeInit () {
 		}
 		animate();
 
-		console.log(renderer); // ----------------temp log
 	}
 }
-
+/*http://earth3d.local/sportcamps/#advantages-slider-5*/
