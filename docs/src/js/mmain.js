@@ -58,9 +58,10 @@ function ThreeInit () {
 
 		function animate() {
 			requestAnimationFrame( animate );
-			// animation=================================
+			//===ANIMATION HERE=====
 
-			// end animation=============================
+
+			//====END ANIMATION=====
 			renderer.render( scene, camera );
 		}
 		animate();
