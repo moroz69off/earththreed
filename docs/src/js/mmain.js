@@ -59,7 +59,7 @@ function ThreeInit () {
 			requestAnimationFrame( animate );
 			//===ANIMATION HERE=====
 
-			earth.rotation.y += .01;
+			earth.rotation.y += .005;
 			console.log('!!!!!!!!!!');
 
 			//====END ANIMATION=====
