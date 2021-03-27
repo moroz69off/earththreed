@@ -25,9 +25,7 @@ loading_manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
 	console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
 };
 
-var /*const*/ earth_map = texsture_loader.load('./src/texture/earth_map_texture.gif');
-//"W:\openserver\domains\earththreed.main\docs\src\texture\earth_map_texture.gif"
-console.log(earth_map);
+const earth_map = texsture_loader.load('./src/texture/earth_map_texture.gif');
 
 ThreeInit();
 
@@ -61,12 +59,12 @@ function ThreeInit () {
 			requestAnimationFrame( animate );
 			//===ANIMATION HERE=====
 
+			earth.rotation.y += .01;
+			console.log('!!!!!!!!!!');
 
 			//====END ANIMATION=====
 			renderer.render( scene, camera );
 		}
 		animate();
-
 	}
 }
-/*http://earth3d.local/sportcamps/#advantages-slider-5*/
