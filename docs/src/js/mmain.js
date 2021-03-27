@@ -1,4 +1,5 @@
 import * as THREE from 'https://moroz69off.github.io/earththreed/three/three.module.js';
+
 var /*const*/ scene = null;
 var /*const*/ camera = null;
 var /*const*/ renderer = null;
@@ -60,7 +61,6 @@ function ThreeInit () {
 			//===ANIMATION HERE=====
 
 			earth.rotation.y += .005;
-			console.log('!!!!!!!!!!');
 
 			//====END ANIMATION=====
 			renderer.render( scene, camera );
