@@ -1,4 +1,4 @@
-import * as THREE from 'https://moroz69off.github.io/earththreed/three/three.module.js';
+//import * as THREE from 'https://moroz69off.github.io/earththreed/three/three.module.js';
 
 var /*const*/ scene = null;
 var /*const*/ camera = null;
@@ -9,9 +9,9 @@ var /*const*/ longitude_segments = 32; //долгота
 var /*const*/ loading_manager = new THREE.LoadingManager();
 var /*const*/ texsture_loader = new THREE.TextureLoader(loading_manager);
 var /*const*/ camera_orbit_control = null;
+var /*const*/ wrf = null;
 
 var WR = THREEx;
-console.log(WR);
 
 loading_manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
 	console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
@@ -43,7 +43,7 @@ function ThreeInit () {
 			canvas: document.getElementById('c')
 		});
 		renderer.setSize(window.innerWidth, window.innerHeight);
-		renderer.setClearColor(0x000000);//0xCFCFCF
+		renderer.setClearColor(0x000000);//0xCFCFCF or 0x000000
 		
 		const earth_geometry = new THREE.SphereGeometry(
 			earth_radius,
@@ -55,23 +55,37 @@ function ThreeInit () {
 			map: earth_map
 		});
 		const earth = new THREE.Mesh( earth_geometry, earth_material );
-		camera.rotation.z = 0.4091;
+		camera.rotation.z = 0.4091; // angle of inclination of the earth's axis (23.44° to radian)
 		scene.add( earth );
 
 		camera.position.z = 50;
 
-		var wrf = new WR.WindowResize(renderer, camera);
+		wrf = new WR.WindowResize(renderer, camera);
+
+		camera_orbit_control = new THREE.OrbitControls(camera);
+		camera_orbit_control.autoRotate = true;
+		camera_orbit_control.enablePan = false;
+		camera_orbit_control.maxPolarAngle = 2.34;
+		camera_orbit_control.minPolarAngle = .567;
+
+		//camera_orbit_control.enableDamping = true;
+
+		let canvasus = document.getElementById('c');
+		canvasus.onclick = function(event) {
+			console.log(event);
+		}
+
+
+
+		//console.log(camera_orbit_control);
 
 		function animate() {
 			requestAnimationFrame( animate );
 			//===ANIMATION HERE=====
-
-			earth.rotation.y += .025345678;
-
+			camera_orbit_control.update();
 			//====END ANIMATION=====
 			renderer.render( scene, camera );
 		}
 		animate();
 	}
-	wrf.destroy();
 }

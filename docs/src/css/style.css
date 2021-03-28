@@ -1,4 +1,11 @@
+@font-face {
+	font-family: "Comfortaa";
+	src: url("../other/Comfortaa/Comfortaa-VariableFont_wght.ttf");
+}
+
 body, #c{
+	font-family: 'Comfortaa', bold, 'Consolas';
+	font-weight: 700;
 	margin: 0;
 	padding: 0;
 	width: 100%;
@@ -9,4 +16,27 @@ body, #c{
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+.ontop{
+	margin: .2% 2.2% .2% 2.2%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: #cfcfcf;
+	z-index: 2;
+}
+
+#header a:hover{
+	color: #f7f7f7;
+	text-decoration-style: dotted;
+	text-decoration-line: overline;
+	text-decoration-color: aqua;
+}
+
+#header a{
+	color: #f7f7f7;
+	text-decoration-style: wavy;
+	text-decoration-line: underline;
+	text-decoration-color: yellow;
 }
