@@ -43,7 +43,7 @@ function ThreeInit () {
 			canvas: document.getElementById('c')
 		});
 		renderer.setSize(window.innerWidth, window.innerHeight);
-		renderer.setClearColor(0xCFCFCF);
+		renderer.setClearColor(0x000000);//0xCFCFCF
 		
 		const earth_geometry = new THREE.SphereGeometry(
 			earth_radius,
@@ -55,6 +55,7 @@ function ThreeInit () {
 			map: earth_map
 		});
 		const earth = new THREE.Mesh( earth_geometry, earth_material );
+		camera.rotation.z = 0.4091;
 		scene.add( earth );
 
 		camera.position.z = 50;
@@ -65,11 +66,12 @@ function ThreeInit () {
 			requestAnimationFrame( animate );
 			//===ANIMATION HERE=====
 
-			earth.rotation.y += .005;
+			earth.rotation.y += .025345678;
 
 			//====END ANIMATION=====
 			renderer.render( scene, camera );
 		}
 		animate();
 	}
+	wrf.destroy();
 }
