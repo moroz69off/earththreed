@@ -31,6 +31,7 @@ ThreeInit();
 function ThreeInit () {
 	window.onload = function () {
 		const scene = new THREE.Scene();
+		scene.fog = new THREE.Fog(0xFFFFFF, 20, 60)
 		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
 		const renderer = new THREE.WebGLRenderer({ antialias: true });
 
