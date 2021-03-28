@@ -10,6 +10,9 @@ var /*const*/ loading_manager = new THREE.LoadingManager();
 var /*const*/ texsture_loader = new THREE.TextureLoader(loading_manager);
 var /*const*/ camera_orbit_control = null;
 
+var WR = THREEx;
+console.log(WR);
+
 loading_manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
 	console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
 };
@@ -55,6 +58,8 @@ function ThreeInit () {
 		scene.add( earth );
 
 		camera.position.z = 50;
+
+		var wrf = new WR.WindowResize(renderer, camera);
 
 		function animate() {
 			requestAnimationFrame( animate );
