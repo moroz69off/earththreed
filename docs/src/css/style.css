@@ -27,14 +27,14 @@ body, #c{
 	z-index: 2;
 }
 
-#header a:hover{
+#header a{
 	color: #f7f7f7;
 	text-decoration-style: dotted;
 	text-decoration-line: overline;
 	text-decoration-color: aqua;
 }
 
-#header a{
+#header a:hover{
 	color: #f7f7f7;
 	text-decoration-style: wavy;
 	text-decoration-line: underline;
