@@ -1,10 +1,8 @@
-var obj_body = null;
-var controls = null;
-var earth_radius = 25;
-var latitude_segments = 32;
-var longitude_segments = 32;
-var /*const*/ loading_manager = new THREE.LoadingManager();
-var /*const*/ texsture_loader = new THREE.TextureLoader(loading_manager);
+const earth_radius = 25;
+const latitude_segments = 32;
+const longitude_segments = 32;
+const loading_manager = new THREE.LoadingManager();
+const texsture_loader = new THREE.TextureLoader(loading_manager);
 
 loading_manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
 	console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
@@ -24,18 +22,20 @@ loading_manager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
 	console.log(Math.round(percentComplete, 2) + '% downloaded');
 };
 
-var /*const*/ earth_texture = texsture_loader.load('./src/texture/earth_map_texture.gif');
+const earth_texture = texsture_loader.load('./src/texture/earth_map_texture.gif');
+const wreathe_texture = texsture_loader.load('./src/texture/welt_clouds_map.gif');
+const wreathe_texture_inverse = texsture_loader.load('./src/texture/welt_clouds_map_inverse.gif');
 
 ThreeInit();
 
 function ThreeInit () {
 	window.onload = function () {
-		var /*const*/ scene = new THREE.Scene();
-		var /*const*/ camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
-		var /*const*/ renderer = new THREE.WebGLRenderer({ antialias: true });
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+		const renderer = new THREE.WebGLRenderer({ antialias: true });
 
 		renderer.setSize(window.innerWidth, window.innerHeight);
-		renderer.setClearColor(0x000000); // 0xCFCFCF
+		renderer.setClearColor(0x000000);
 
 		document.body.appendChild(renderer.domElement);
 
@@ -43,34 +43,49 @@ function ThreeInit () {
 
 		THREEx.WindowResize(renderer, camera);
 		
-		var /*const*/ cam_orbit_control = new THREE.OrbitControls(camera);
-		cam_orbit_control = new THREE.OrbitControls(camera);
+		const cam_orbit_control = new THREE.OrbitControls(camera);
 		cam_orbit_control.autoRotate = false;
-		//cam_orbit_control.autoRotateSpeed = 1.111;
 		cam_orbit_control.enablePan = false;
 		cam_orbit_control.maxPolarAngle = 2.34;
 		cam_orbit_control.minPolarAngle = .567;
 		cam_orbit_control.enableDamping = true;
 
-		var /*const*/ earth_geometry = new THREE.SphereGeometry(
+		const earth_geometry = new THREE.SphereGeometry(
 			earth_radius,
 			latitude_segments,
 			longitude_segments
 		);
-		var /*const*/ earth_material = new THREE.MeshBasicMaterial({
+		const earth_material = new THREE.MeshBasicMaterial({
 				color: 0xFFFFFF,
 				map: earth_texture
 			}
 		);
-		var /*const*/ earth = new THREE.Mesh( earth_geometry, earth_material );
+		const earth = new THREE.Mesh( earth_geometry, earth_material );
+
+		const welt_clouds_geometry = new THREE.SphereGeometry(
+			earth_radius + .777,
+			latitude_segments,
+			longitude_segments
+		);
+		const welt_clouds_material = new THREE.MeshBasicMaterial({
+				color: 0xFFFFFF,
+				map:  wreathe_texture,
+				transparent: true,
+				alphaTest: .5,
+				opacity : 1,
+				alphaMap: wreathe_texture
+			}
+		);
+		const welt_clouds = new THREE.Mesh( welt_clouds_geometry, welt_clouds_material );
 
 		scene.add( earth );
+		scene.add( welt_clouds );
 
-		var /*const*/ render = function () {
+		const render = function () {
 			requestAnimationFrame(render);
-			earth.rotation.y += .005;
+			earth.rotation.y += .00251;
+			welt_clouds.rotation.y += .0025;
 			cam_orbit_control.update();
-			//camera.rotation.z = 0.4091; // angle of inclination of the earth's axis (23.44° to radian)
 			renderer.render(scene, camera);
 		};
 
