@@ -67,6 +67,11 @@ function ThreeInit () {
 			latitude_segments,
 			longitude_segments
 		);
+				const welt_clouds_geometry1 = new THREE.SphereGeometry(
+			earth_radius + .888,
+			latitude_segments,
+			longitude_segments
+		);
 		const welt_clouds_material = new THREE.MeshBasicMaterial({
 				color: 0xFFFFFF,
 				map:  wreathe_texture,
@@ -76,7 +81,17 @@ function ThreeInit () {
 				alphaMap: wreathe_texture
 			}
 		);
+		const welt_clouds_material1 = new THREE.MeshBasicMaterial({
+				color: 0xFFFFFF,
+				map:  wreathe_texture,
+				transparent: true,
+				alphaTest: .5,
+				opacity : 1,
+				alphaMap: wreathe_texture
+			}
+		);
 		const welt_clouds = new THREE.Mesh( welt_clouds_geometry, welt_clouds_material );
+		const welt_clouds1 = new THREE.Mesh( welt_clouds_geometry1, welt_clouds_material1 );
 
 		scene.add( earth );
 		scene.add( welt_clouds );
