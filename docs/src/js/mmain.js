@@ -64,12 +64,12 @@ function ThreeInit () {
 		const earth = new THREE.Mesh( earth_geometry, earth_material );
 
 		const welt_clouds_geometry = new THREE.SphereGeometry(
-			earth_radius + .777,
+			earth_radius + .7,
 			latitude_segments,
 			longitude_segments
 		);
 				const welt_clouds_geometry1 = new THREE.SphereGeometry(
-			earth_radius + .888,
+			earth_radius + .8,
 			latitude_segments,
 			longitude_segments
 		);
@@ -96,11 +96,13 @@ function ThreeInit () {
 
 		scene.add( earth );
 		scene.add( welt_clouds );
+		scene.add( welt_clouds1 );
 
 		const render = function () {
 			requestAnimationFrame(render);
 			earth.rotation.y += .00251;
 			welt_clouds.rotation.y += .0025;
+			welt_clouds1.rotation.y += .0025;
 			cam_orbit_control.update();
 			renderer.render(scene, camera);
 		};
